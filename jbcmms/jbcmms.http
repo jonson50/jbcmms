@@ -1,6 +1,6 @@
 @jbcmms_HostAddress = http://localhost:5211
 
-GET {{jbcmms_HostAddress}}/weatherforecast/
+GET {{jbcmms_HostAddress}}/jbcmms/
 Accept: application/json
 
 ###
