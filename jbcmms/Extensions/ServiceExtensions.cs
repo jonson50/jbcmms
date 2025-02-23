@@ -1,4 +1,7 @@
 ﻿
+using Contracts;
+using LoggerService;
+
 namespace jbcmms.Extensions
 {
     public static class ServiceExtensions
@@ -12,7 +15,7 @@ namespace jbcmms.Extensions
                         .AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowCredentials()
+                        //.AllowCredentials()
                 );
             });
         }
@@ -23,10 +26,10 @@ namespace jbcmms.Extensions
                 //options.AutomaticAuthentication = false;
             });
         }
-        //public static void ConfigureLoggerService(this IServiceCollection services)
-        //{
-        //    services.AddSingleton<ILoggerManager, LoggerManager>();
-        //}
+        public static void ConfigureLoggerService(this IServiceCollection services)
+        {
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
         //public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
         //{
         //    var connectionString = configuration["ConnectionStrings:DefaultConnection"];
