@@ -14,5 +14,11 @@ namespace Repository
             : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Asset> GetAllAssets(bool trackChanges) => 
+            FindAll(trackChanges)
+                .OrderBy(c => c.Name)
+                .ToList();
+        
     }
 }

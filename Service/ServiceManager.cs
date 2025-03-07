@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Contracts;
 using Service.Contracts;
 
@@ -23,20 +24,20 @@ namespace Service
         private readonly Lazy<IWorkOrderAssignmentService> _workOrderAssignmentService;
         private readonly Lazy<IWorkOrderService> _workOrderService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger)
+        public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper)
         {
-            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, logger));
-            _assetCategoryService = new Lazy<IAssetCategoryService>(() => new AssetCategoryService(repositoryManager, logger));
-            _assetService = new Lazy<IAssetService>(() => new AssetService(repositoryManager, logger));
-            _failureReportService = new Lazy<IFailureReportService>(() => new FailureReportService(repositoryManager, logger));
-            _inventoryService = new Lazy<IInventoryService>(() => new InventoryService(repositoryManager, logger));
-            _locationService = new Lazy<ILocationService>(() => new LocationService(repositoryManager, logger));
-            _maintenanceScheduleService = new Lazy<IMaintenanceScheduleService>(() => new MaintenanceScheduleService(repositoryManager, logger));
-            _roleService = new Lazy<IRoleService>(() => new RoleService(repositoryManager, logger));
-            _sparePartService = new Lazy<ISparePartService>(() => new SparePartService(repositoryManager, logger));
-            _supplierService = new Lazy<ISupplierService>(() => new SupplierService(repositoryManager, logger));
-            _workOrderAssignmentService = new Lazy<IWorkOrderAssignmentService>(() => new WorkOrderAssignmentService(repositoryManager, logger));
-            _workOrderService = new Lazy<IWorkOrderService>(() => new WorkOrderService(repositoryManager, logger));
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, logger, mapper));
+            _assetCategoryService = new Lazy<IAssetCategoryService>(() => new AssetCategoryService(repositoryManager, logger, mapper));
+            _assetService = new Lazy<IAssetService>(() => new AssetService(repositoryManager, logger, mapper));
+            _failureReportService = new Lazy<IFailureReportService>(() => new FailureReportService(repositoryManager, logger, mapper));
+            _inventoryService = new Lazy<IInventoryService>(() => new InventoryService(repositoryManager, logger, mapper));
+            _locationService = new Lazy<ILocationService>(() => new LocationService(repositoryManager, logger, mapper));
+            _maintenanceScheduleService = new Lazy<IMaintenanceScheduleService>(() => new MaintenanceScheduleService(repositoryManager, logger, mapper));
+            _roleService = new Lazy<IRoleService>(() => new RoleService(repositoryManager, logger, mapper));
+            _sparePartService = new Lazy<ISparePartService>(() => new SparePartService(repositoryManager, logger, mapper));
+            _supplierService = new Lazy<ISupplierService>(() => new SupplierService(repositoryManager, logger, mapper));
+            _workOrderAssignmentService = new Lazy<IWorkOrderAssignmentService>(() => new WorkOrderAssignmentService(repositoryManager, logger, mapper));
+            _workOrderService = new Lazy<IWorkOrderService>(() => new WorkOrderService(repositoryManager, logger, mapper));
         }
         public IUserService UserService => _userService.Value;
 
