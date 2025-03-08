@@ -22,15 +22,8 @@ namespace Presentation.Controllers
         [HttpGet]
         public IActionResult GetAssets()
         { 
-            try
-            {
-                var assets = _serviceManager.AssetService.GetAllAssets(trackChanges: false);
-                return Ok(assets);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal server error");
-            }
+            var assets = _serviceManager.AssetService.GetAllAssets(trackChanges: false);
+            return Ok(assets);
         }
     }
 }

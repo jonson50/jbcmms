@@ -25,18 +25,10 @@ namespace Service
 
         public IEnumerable<AssetDto> GetAllAssets(bool trackChanges)
         {
-            try
-            {
-                var assets = _repository.Asset.GetAllAssets(trackChanges);
-                var assetsDto = _mapper.Map<IEnumerable<AssetDto>>(assets);
+            var assets = _repository.Asset.GetAllAssets(trackChanges);
+            var assetsDto = _mapper.Map<IEnumerable<AssetDto>>(assets);
 
-                return assetsDto;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong in the {nameof(GetAllAssets)} service method: {ex}");
-                throw;
-            }
+            return assetsDto;
         }
     }
 }
