@@ -11,5 +11,6 @@ namespace Service.Contracts
     public interface IAssetService
     {
         IEnumerable<AssetDto> GetAllAssets(bool trackChanges);
+        AssetDto GetAsset(Guid assetId, bool trackChanges);
     }
 }

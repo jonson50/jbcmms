@@ -19,6 +19,9 @@ namespace Repository
             FindAll(trackChanges)
                 .OrderBy(c => c.Name)
                 .ToList();
-        
+
+        public Asset? GetAsset(Guid assetId, bool trackChanges) =>
+             FindByCondition(c => c.Id.Equals(assetId), trackChanges)
+             .SingleOrDefault();
     }
 }

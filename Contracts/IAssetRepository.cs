@@ -10,5 +10,6 @@ namespace Contracts
     public interface IAssetRepository
     {
         IEnumerable<Asset> GetAllAssets(bool trackChanges);
+        Asset? GetAsset(Guid assetId, bool trackChanges);
     }
 }

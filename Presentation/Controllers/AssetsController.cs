@@ -25,5 +25,12 @@ namespace Presentation.Controllers
             var assets = _serviceManager.AssetService.GetAllAssets(trackChanges: false);
             return Ok(assets);
         }
+
+        [HttpGet("{id:guid}")]
+        public IActionResult GetAsset(Guid id)
+        {
+            var asset = _serviceManager.AssetService.GetAsset(id, trackChanges: false);
+            return Ok(asset);
+        }
     }
 }
