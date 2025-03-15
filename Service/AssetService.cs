@@ -24,21 +24,19 @@ namespace Service
             _mapper = mapper;
         }
 
-        public IEnumerable<AssetDto> GetAllAssets(bool trackChanges)
+        public async Task<IEnumerable<AssetDto>> GetAllAssetsAsync(bool trackChanges)
         {
-            var assets = _repository.Asset.GetAllAssets(trackChanges);
+            var assets = await _repository.Asset.GetAllAssetsAsync(trackChanges);
             var assetsDto = _mapper.Map<IEnumerable<AssetDto>>(assets);
 
             return assetsDto;
         }
 
-        public AssetDto GetAsset(Guid assetId, bool trackChanges)
+        public async Task<AssetDto> GetAssetAsync(Guid assetId, bool trackChanges)
         {
-            var asset = _repository.Asset.GetAsset(assetId, trackChanges);
-            if(asset is null)
-                throw new AssetNotFoundException(assetId);
-
+            var asset = await _repository.Asset.GetAssetAsync(assetId, trackChanges) ?? throw new AssetNotFoundException(assetId);
             var assetDto = _mapper.Map<AssetDto>(asset);
+
             return assetDto;
         }
     }

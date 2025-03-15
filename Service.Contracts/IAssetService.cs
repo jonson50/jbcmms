@@ -10,7 +10,7 @@ namespace Service.Contracts
 {
     public interface IAssetService
     {
-        IEnumerable<AssetDto> GetAllAssets(bool trackChanges);
-        AssetDto GetAsset(Guid assetId, bool trackChanges);
+        Task<IEnumerable<AssetDto>> GetAllAssetsAsync(bool trackChanges);
+        Task<AssetDto> GetAssetAsync(Guid assetId, bool trackChanges);
     }
 }

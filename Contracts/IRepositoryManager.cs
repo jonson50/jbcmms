@@ -20,6 +20,6 @@ namespace Contracts
         IUserRepository User { get; }
         IWorkOrderRepository WorkOrder { get; }
         IWorkOrderAssignmentRepository WorkOrderAssignment { get; }
-        void Save();
+        Task SaveAsync();
     }
 }

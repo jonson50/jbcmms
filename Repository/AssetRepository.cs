@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Contracts;
+﻿using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -15,13 +11,13 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Asset> GetAllAssets(bool trackChanges) => 
-            FindAll(trackChanges)
+        public async Task<IEnumerable<Asset>> GetAllAssetsAsync(bool trackChanges) =>
+            await FindAll(trackChanges)
                 .OrderBy(c => c.Name)
-                .ToList();
+                .ToListAsync();
 
-        public Asset? GetAsset(Guid assetId, bool trackChanges) =>
-             FindByCondition(c => c.Id.Equals(assetId), trackChanges)
-             .SingleOrDefault();
+        public async Task<Asset?> GetAssetAsync(Guid assetId, bool trackChanges) =>
+             await FindByCondition(c => c.Id.Equals(assetId), trackChanges)
+             .SingleOrDefaultAsync();
     }
 }

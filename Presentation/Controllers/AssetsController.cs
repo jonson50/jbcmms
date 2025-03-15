@@ -20,16 +20,16 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAssets()
+        public async Task<IActionResult> GetAssets()
         { 
-            var assets = _serviceManager.AssetService.GetAllAssets(trackChanges: false);
+            var assets = await _serviceManager.AssetService.GetAllAssetsAsync(trackChanges: false);
             return Ok(assets);
         }
 
         [HttpGet("{id:guid}")]
-        public IActionResult GetAsset(Guid id)
+        public async Task<IActionResult> GetAsset(Guid id)
         {
-            var asset = _serviceManager.AssetService.GetAsset(id, trackChanges: false);
+            var asset = await _serviceManager.AssetService.GetAssetAsync(id, trackChanges: false);
             return Ok(asset);
         }
     }
