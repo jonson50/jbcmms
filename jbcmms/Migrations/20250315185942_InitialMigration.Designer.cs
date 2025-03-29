@@ -12,8 +12,8 @@ using Repository;
 namespace jbcmms.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20250301125303_AssetLocationSupplier")]
-    partial class AssetLocationSupplier
+    [Migration("20250315185942_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace jbcmms.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AssetCategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("LocationId")
@@ -55,11 +58,37 @@ namespace jbcmms.Migrations
 
                     b.HasIndex("AssetCategoryId");
 
+                    b.HasIndex("CompanyId");
+
                     b.HasIndex("LocationId");
 
                     b.HasIndex("SupplierId");
 
                     b.ToTable("Assets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5c439755-fb1f-4a35-82ed-6fabe23e90a5"),
+                            AssetCategoryId = new Guid("90696613-f797-40b0-aa23-84220db0403e"),
+                            CompanyId = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c12"),
+                            LocationId = new Guid("14555dc6-b4c4-4f9b-8169-9c7acd481320"),
+                            Name = "Dummy Asset",
+                            PurchaseDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SerialNumber = "123456789",
+                            SupplierId = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c22")
+                        },
+                        new
+                        {
+                            Id = new Guid("345f7ea5-fd38-4706-8c28-4ca25bd5d11b"),
+                            AssetCategoryId = new Guid("b2c4f4e0-4b6d-4b4f-8b8e-2f3b6f4b9e1d"),
+                            CompanyId = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c12"),
+                            LocationId = new Guid("3c92b091-b435-4bd7-9187-edfe7084d04e"),
+                            Name = "Asset 2",
+                            PurchaseDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SerialNumber = "456789",
+                            SupplierId = new Guid("0f57cd75-67b3-4e09-8ed8-9fad1f5c8516")
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.AssetCategory", b =>
@@ -86,6 +115,45 @@ namespace jbcmms.Migrations
                         {
                             Id = new Guid("b2c4f4e0-4b6d-4b4f-8b8e-2f3b6f4b9e1d"),
                             Name = "Another Category"
+                        });
+                });
+
+            modelBuilder.Entity("Entities.Models.Company", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Industry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Companies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c12"),
+                            Address = "1234 Elm St, Springfield, IL 62701",
+                            Industry = "Software",
+                            Name = "Dummy Company"
+                        },
+                        new
+                        {
+                            Id = new Guid("0f57cd75-67b3-4e09-8ed8-9fad1f5c8516"),
+                            Address = "5678 Oak St, Springfield, IL 62702",
+                            Industry = "Hardware",
+                            Name = "Another Company"
                         });
                 });
 
@@ -242,6 +310,9 @@ namespace jbcmms.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ContactPerson")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -260,12 +331,15 @@ namespace jbcmms.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.ToTable("Suppliers");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c22"),
+                            CompanyId = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c12"),
                             ContactPerson = "John Doe",
                             Email = "john.doe@example.com",
                             Name = "Dummy Supplier",
@@ -274,6 +348,7 @@ namespace jbcmms.Migrations
                         new
                         {
                             Id = new Guid("0f57cd75-67b3-4e09-8ed8-9fad1f5c8516"),
+                            CompanyId = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c12"),
                             ContactPerson = "Jane Doe",
                             Email = "jane@mail.com",
                             Name = "Another Supplier",
@@ -285,6 +360,9 @@ namespace jbcmms.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
@@ -308,6 +386,8 @@ namespace jbcmms.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
@@ -320,6 +400,9 @@ namespace jbcmms.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AssetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CompletedDate")
@@ -338,6 +421,8 @@ namespace jbcmms.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AssetId");
+
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("WorkOrders");
                 });
@@ -389,6 +474,12 @@ namespace jbcmms.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entities.Models.Company", "Company")
+                        .WithMany("Assets")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entities.Models.Location", "Location")
                         .WithMany("Assets")
                         .HasForeignKey("LocationId")
@@ -402,6 +493,8 @@ namespace jbcmms.Migrations
                         .IsRequired();
 
                     b.Navigation("AssetCategory");
+
+                    b.Navigation("Company");
 
                     b.Navigation("Location");
 
@@ -447,13 +540,32 @@ namespace jbcmms.Migrations
                     b.Navigation("Asset");
                 });
 
+            modelBuilder.Entity("Entities.Models.Supplier", b =>
+                {
+                    b.HasOne("Entities.Models.Company", "Company")
+                        .WithMany("Suppliers")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("Entities.Models.User", b =>
                 {
+                    b.HasOne("Entities.Models.Company", "Company")
+                        .WithMany("Users")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entities.Models.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Company");
 
                     b.Navigation("Role");
                 });
@@ -466,7 +578,15 @@ namespace jbcmms.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entities.Models.Company", "Company")
+                        .WithMany("WorkOrders")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Asset");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Entities.Models.WorkOrderAssignment", b =>
@@ -511,6 +631,17 @@ namespace jbcmms.Migrations
             modelBuilder.Entity("Entities.Models.AssetCategory", b =>
                 {
                     b.Navigation("Assets");
+                });
+
+            modelBuilder.Entity("Entities.Models.Company", b =>
+                {
+                    b.Navigation("Assets");
+
+                    b.Navigation("Suppliers");
+
+                    b.Navigation("Users");
+
+                    b.Navigation("WorkOrders");
                 });
 
             modelBuilder.Entity("Entities.Models.Location", b =>

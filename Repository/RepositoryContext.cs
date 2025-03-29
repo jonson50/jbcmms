@@ -16,11 +16,13 @@ namespace Repository
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
             modelBuilder.ApplyConfiguration(new LocationConfiguration());
             modelBuilder.ApplyConfiguration(new AssetCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new AssetConfiguration());
         }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<Asset> Assets { get; set; }
         public DbSet<AssetCategory> AssetCategories { get; set; }
         public DbSet<FailureReport> FailureReports { get; set; }
@@ -32,7 +34,6 @@ namespace Repository
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
-        public DbSet<WorkOrderAssignment> WorkOrderAssignments { get; set; }
-
+        public DbSet<WorkOrderAssignment> WorkOrderAssignments { get; set; } 
     }
 }

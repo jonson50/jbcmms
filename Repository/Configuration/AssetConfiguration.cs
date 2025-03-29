@@ -23,7 +23,8 @@ namespace Repository.Configuration
                         PurchaseDate = new DateTime(2021, 1, 1),
                         AssetCategoryId = new Guid("90696613-f797-40b0-aa23-84220db0403e"),
                         LocationId = new Guid("14555dc6-b4c4-4f9b-8169-9c7acd481320"),
-                        SupplierId = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c22")
+                        SupplierId = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c22"),
+                        CompanyId =  new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c12")
                     },
                     new Asset
                     {
@@ -33,7 +34,8 @@ namespace Repository.Configuration
                         PurchaseDate = new DateTime(2021, 1, 1),
                         AssetCategoryId = new Guid("b2c4f4e0-4b6d-4b4f-8b8e-2f3b6f4b9e1d"),
                         LocationId = new Guid("3c92b091-b435-4bd7-9187-edfe7084d04e"),
-                        SupplierId = new Guid("0f57cd75-67b3-4e09-8ed8-9fad1f5c8516")
+                        SupplierId = new Guid("0f57cd75-67b3-4e09-8ed8-9fad1f5c8516"),
+                        CompanyId = new Guid("f59b65d3-77c6-48dc-82e0-2f704e3e0c12")
                     }
                 );
         }

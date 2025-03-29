@@ -14,5 +14,8 @@ namespace Entities.Models
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public ICollection<Asset> Assets { get; set; } = new List<Asset>();
+
+        public Guid CompanyId { get; set; } //Tenant Key
+        public Company Company { get; set; } = null!;
     }
 }

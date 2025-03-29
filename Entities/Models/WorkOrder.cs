@@ -18,5 +18,8 @@ namespace Entities.Models
         public WorkOrderStatus Status { get; set; } = WorkOrderStatus.Open;
         public ICollection<WorkOrderAssignment> Assignments { get; set; } = new List<WorkOrderAssignment>();
         public ICollection<SparePart> SpareParts { get; set; } = new List<SparePart>();
+
+        public Guid CompanyId { get; set; } //Tenant Key
+        public Company Company { get; set; } = null!;
     }
 }

@@ -19,5 +19,8 @@ namespace Entities.Models
         public Guid SupplierId { get; set; }
         public Supplier Supplier { get; set; } = null!;
         public ICollection<WorkOrder> WorkOrders { get; set; } = new List<WorkOrder>();
+
+        public Guid CompanyId { get; set; } //Tenant Key
+        public Company Company { get; set; } = null!;
     }
 }
